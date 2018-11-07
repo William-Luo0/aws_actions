@@ -1,7 +1,8 @@
-import get_actions
+import json
 import unittest
 from unittest import mock
-import json
+
+import get_actions
 
 
 class TestJsonToActions(unittest.TestCase):
