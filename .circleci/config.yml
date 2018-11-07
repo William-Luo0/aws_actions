@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/aws_actions
+    docker:
+      - image: circleci/python:3.6.5
+    steps:
+      - checkout
+
+      - run:
+          name: Setup virtualenv
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+
+      - run:
+          name: Run Tests
+          command: |
+            . venv/bin/activate
+            python run_tests.py
+
+      - store_test_results:
+          path: test-reports/
+
