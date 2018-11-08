@@ -44,6 +44,17 @@ def generate_action_list(sort=False, write_to_file=False):
     return action_list
 
 
+def pull_action_list(sort=False, file='aws_action_list.txt'):
+    with open(file, 'r') as f:
+        action_list = f.readlines()
+    action_list = [line.strip() for line in action_list]
+
+    if sort:
+        action_list.sort()
+
+    return action_list
+
+
 def main():
     generate_action_list(True, True)
 
