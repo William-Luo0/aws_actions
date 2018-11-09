@@ -1,6 +1,9 @@
 # Generated Action list
 aws_action_list.txt
 
+# Idea stuff
+.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
