@@ -29,7 +29,7 @@ def generate_action_list(sort=False, write_to_file=False):
         action_list = json_to_actions(full_json["serviceMap"])
 
     except (ValueError, KeyError, IndexError) as e:
-        print("Unexpected response, check " + _AWS_POLICY_URL, file=sys.stderr)
+        print("ERR: Unexpected response, check " + _AWS_POLICY_URL, file=sys.stderr)
         exit(e)
 
     if sort:
