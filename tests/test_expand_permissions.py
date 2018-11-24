@@ -27,6 +27,25 @@ class TestExpandPermissions(unittest.TestCase):
                           '"Resource": "*"}]}'
         self.assertEqual(full_policy, expected_policy)
 
+    def test_discard_unknown_service(self):
+        """
+        WHEN the given policy has a service/action that is not known
+        THEN the unknown service/action should be discarded
+        """
+        test_policy = '{"Version": "2012-10-17", ' + \
+                      '"Statement": [{"Action": ["unknownService:*"], ' + \
+                      '"Effect": "Allow", ' + \
+                      '"Resource": "*"}]}'
+        test_actions = ['service:action1', 'service:action2', 'service:action3']
+
+        full_policy = expand_permissions.expand_permissions(test_policy, test_actions, True)
+
+        expected_policy = '{"Version": "2012-10-17", ' + \
+                          '"Statement": [{"Action": [], ' + \
+                          '"Effect": "Allow", ' + \
+                          '"Resource": "*"}]}'
+        self.assertEqual(full_policy, expected_policy)
+
     def test_full_service_expansion(self):
         """
         WHEN the given policy has a known service with * permissions

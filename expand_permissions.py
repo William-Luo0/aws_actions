@@ -3,7 +3,7 @@ import json
 import sys
 
 
-def expand_permissions(aws_policy, all_actions):
+def expand_permissions(aws_policy, all_actions, discard_unknown=False):
     policy_json = []
     try:
         policy_json = json.loads(aws_policy)
@@ -17,7 +17,7 @@ def expand_permissions(aws_policy, all_actions):
         replace_actions = []
         for action in statement["Action"]:
             matched_actions = fnmatch.filter(all_actions, action)
-            if len(matched_actions) == 0:
+            if len(matched_actions) == 0 and not discard_unknown:
                 replace_actions.append(action)
                 print("WARN: Could not match '" + action + "'", file=sys.stderr)
             else:
